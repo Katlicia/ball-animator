@@ -6,10 +6,9 @@ class Button:
         self.rect = pygame.Rect(x, y, self.sprite.get_width(), self.sprite.get_height())
         self.win = win
         self.coordinates = x, y
-        self.draw(win)
 
-    def draw(self, win):
-        win.blit(self.sprite, self.coordinates)
+    def draw(self):
+        self.win.blit(self.sprite, self.coordinates)
 
     def isClicked(self, pos):
         return self.rect.collidepoint(pos)
