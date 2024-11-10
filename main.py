@@ -52,9 +52,10 @@ def main():
     win.fill((255, 255, 255))
 
     color = "red"
-    speed = 50
+    speed = 100
     ball_list = []
     button_list = []
+    play = False
 
     playbutton = Button(10, 480, "images/play.png", win)
     pausebutton = Button(10, 510, "images/pause.png", win)
@@ -82,42 +83,44 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 if playbutton.isClicked(pos):
-                    print("Clicked play.")
+                    play = True
 
                 elif pausebutton.isClicked(pos):
-                    print("Clicked pause.")
+                    play = False
                     
                 elif resetbutton.isClicked(pos):
-                    print("Clicked reset.")
                     ball_list.clear()
+                    speed = 100
+                    color = "red"
 
                 elif speedupbutton.isClicked(pos):
-                    print("Clicked speed up.")
                     speed *= 2
+                    for ball in ball_list:
+                        ball.speed = speed
+                        ball.updatespeed()
 
-                elif IsBallClicked(SMALL_BALL_CENTER, SMALL_BALL_RADIUS, pos):
-                    print("Clicked small ball.")                    
+
+                elif IsBallClicked(SMALL_BALL_CENTER, SMALL_BALL_RADIUS, pos):                  
                     ball_list.append(Ball(SMALL_BALL_RADIUS, color, speed, CREATED_SMALL_BALL_CENTER, win))
 
                 elif IsBallClicked(MEDIUM_BALL_CENTER, MEDIUM_BALL_RADIUS, pos):
-                    print("Clicked medium ball.")
                     ball_list.append(Ball(MEDIUM_BALL_RADIUS, color, speed, CREATED_MEDIUM_BALL_CENTER, win))
 
                 elif IsBallClicked(LARGE_BALL_CENTER, LARGE_BALL_RADIUS, pos):
-                    print("Clicked large ball.")
                     ball_list.append(Ball(LARGE_BALL_RADIUS, color, speed, CREATED_LARGE_BALL_CENTER, win))
 
                 elif IsBallClicked(RED_BALL_CENTER, SMALL_BALL_RADIUS, pos):
-                    print("Clicked red ball.")
                     color = "red"
 
                 elif IsBallClicked(BLUE_BALL_CENTER, SMALL_BALL_RADIUS, pos):
-                    print("Clicked blue ball.")
                     color = "blue"
 
                 elif IsBallClicked(YELLOW_BALL_CENTER, SMALL_BALL_RADIUS, pos):
-                    print("Clicked yellow ball.")
                     color = "yellow"
+
+        if play:
+            for ball in ball_list:
+                ball.move(dt)
 
         DrawGui(ball_list, button_list)
         pygame.display.update()
