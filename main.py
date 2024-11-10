@@ -99,7 +99,6 @@ def main():
                         ball.speed = speed
                         ball.updatespeed()
 
-
                 elif IsBallClicked(SMALL_BALL_CENTER, SMALL_BALL_RADIUS, pos):                  
                     ball_list.append(Ball(SMALL_BALL_RADIUS, color, speed, CREATED_SMALL_BALL_CENTER, win))
 
