@@ -12,6 +12,7 @@ A simple and interactive ball animation application built with Python that allow
   - Play/Pause button
   - Stop button
   - Reset button
+  - Speed up button
 - Real-time ball physics simulation
 - Multiple balls can coexist in the animation space
 
